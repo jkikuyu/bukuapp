@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -35,11 +36,14 @@ public class TeacherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.teacherscreen);
         spnClasses = (Spinner) findViewById(R.id.spnClassList);
         new PopulateList().execute();
     }
-
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
     public class PopulateList extends AsyncTask<String,Void, String> {
         private Connection dbConn;
         private Statement statement;
@@ -60,18 +64,18 @@ public class TeacherActivity extends AppCompatActivity {
             super.onPostExecute(s);
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            populateSpinner();
+            //populateSpinner();
         }
 
         @Override
         protected String doInBackground(String... params) {
-
-            try {
 /*
+            try {
+
                 URL url = new URL(strURL);
 
                 HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-*/
+
                 // Load the postgreSQL driver
                     Class.forName("org.postgresql.Driver");
                     // Setup the connection with the DB
@@ -89,14 +93,16 @@ public class TeacherActivity extends AppCompatActivity {
 
                     }
 
-            }
+            }*/
+/*
             catch(ClassNotFoundException e){
                     System.out.println("unable to locate database driver");
              }
             catch(Exception e) {
                 System.out.println("unable to connect to server");
-            }
+            }*/
             return null;
+
         }
 
     }
