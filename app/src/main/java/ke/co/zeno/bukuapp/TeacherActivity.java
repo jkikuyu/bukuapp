@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -22,10 +23,11 @@ public class TeacherActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private List<String> classList =null;
     private Spinner spnClasses = null;
+    private Toolbar toolbar;
     private static final String TAG = TeacherActivity.class.getSimpleName();
 
     public TeacherActivity() {
-        strURL = "jdbc:postgresql://10.0.2.2:5432/buku";
+        strURL = "jdbc:postgresql://10.0.3.2:5432/buku";
                 //jdbc:postgresql://127.0.0.1:5432/testdb
         user = "postgres";
         pass = "postgres";
@@ -37,8 +39,11 @@ public class TeacherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teacherscreen);
-        spnClasses = (Spinner) findViewById(R.id.spnClassList);
-        new PopulateList().execute();
+        toolbar = (Toolbar)findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        //spnClasses = (Spinner) findViewById(R.id.spnClassList);
+        //new PopulateList().execute();
+
     }
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -64,18 +69,18 @@ public class TeacherActivity extends AppCompatActivity {
             super.onPostExecute(s);
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            //populateSpinner();
+            populateSpinner();
         }
 
         @Override
         protected String doInBackground(String... params) {
-/*
-            try {
 
+            try {
+/*
                 URL url = new URL(strURL);
 
                 HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-
+*/
                 // Load the postgreSQL driver
                     Class.forName("org.postgresql.Driver");
                     // Setup the connection with the DB
@@ -93,14 +98,14 @@ public class TeacherActivity extends AppCompatActivity {
 
                     }
 
-            }*/
-/*
+            }
+
             catch(ClassNotFoundException e){
                     System.out.println("unable to locate database driver");
              }
             catch(Exception e) {
                 System.out.println("unable to connect to server");
-            }*/
+            }
             return null;
 
         }
