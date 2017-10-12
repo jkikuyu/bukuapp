@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,16 +25,42 @@ import ke.co.zeno.bukuapp.model.Stream;
 public class StreamHelperAdapter extends RecyclerView.Adapter<StreamHelperAdapter.StreamViewHolder> {
     Context context;
     List <Stream> streamList;
-    public StreamHelperAdapter(Context context,List<Stream> streams){
+    public StreamHelperAdapter(Context context){
         this.context = context;
-        //streamList = new ArrayList<>();
-        streamList = streams;
+        streamList = new ArrayList<>();
     }
+    public void updateList(List<Stream> streamList) {
+        this.streamList = streamList;
+        notifyDataSetChanged();
+    }
+
+
+
+
+    @Override
+    public StreamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.stream_list_row, parent, false);
+        StreamViewHolder viewHolder = new StreamViewHolder(view);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(StreamViewHolder holder, int position) {
+
+        holder.onBind(position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return streamList.size();
+    }
+
     public class StreamViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.streamIcon)
         ImageView streamIcon;
         @BindView(R.id.streamName)
         TextView streamName;
+
         public StreamViewHolder(View streamView) {
             super(streamView);
             ButterKnife.bind(this, streamView);
@@ -48,21 +75,4 @@ public class StreamHelperAdapter extends RecyclerView.Adapter<StreamHelperAdapte
         }
     }
 
-
-    @Override
-    public StreamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.stream_list_row, parent, false);
-        StreamViewHolder viewHolder = new StreamViewHolder(view);
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(StreamViewHolder holder, int position) {
-        holder.onBind(position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return streamList.size();
-    }
 }

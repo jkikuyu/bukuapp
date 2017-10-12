@@ -1,9 +1,9 @@
 package ke.co.zeno.bukuapp.ui.base;
 
 /**
- * Created by amitshekhar on 13/01/17.
+ * adopted from
+ * https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
  */
-
 public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     private V mMvpView;

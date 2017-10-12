@@ -1,9 +1,10 @@
 package ke.co.zeno.bukuapp.ui.main;
 
-import com.mindorks.snaphelperexample.data.model.App;
-import com.mindorks.snaphelperexample.ui.base.MvpView;
 
 import java.util.List;
+
+import ke.co.zeno.bukuapp.model.Stream;
+import ke.co.zeno.bukuapp.ui.base.MvpView;
 
 /**
  * Created by amitshekhar on 13/01/17.
@@ -11,6 +12,6 @@ import java.util.List;
 
 public interface MainMvpView extends MvpView {
 
-    void showApps(List<App> appList);
+    void showStreams(List<Stream> streamList);
 
 }

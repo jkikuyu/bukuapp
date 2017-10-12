@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import ke.co.zeno.bukuapp.R;
-import ke.co.zeno.bukuapp.ui.SignIn;
 
 public class SignUp extends AppCompatActivity {
 

@@ -2,19 +2,20 @@ package ke.co.zeno.bukuapp.injection;
 
 import android.content.Context;
 
-import com.mindorks.snaphelperexample.MyApplication;
-import com.mindorks.snaphelperexample.data.DataManager;
-import com.mindorks.snaphelperexample.ui.base.MvpPresenter;
-import com.mindorks.snaphelperexample.ui.base.MvpView;
-import com.mindorks.snaphelperexample.ui.main.MainActivity;
-import com.mindorks.snaphelperexample.ui.main.MainMvpPresenter;
-import com.mindorks.snaphelperexample.ui.main.MainMvpView;
-import com.mindorks.snaphelperexample.ui.main.MainPresenter;
+import ke.co.zeno.bukuapp.BukuApp;
+import ke.co.zeno.bukuapp.data.DataManager;
+import ke.co.zeno.bukuapp.ui.base.MvpPresenter;
+import ke.co.zeno.bukuapp.ui.base.MvpView;
+import ke.co.zeno.bukuapp.ui.main.MainActivity;
+import ke.co.zeno.bukuapp.ui.main.MainMvpPresenter;
+import ke.co.zeno.bukuapp.ui.main.MainMvpView;
+import ke.co.zeno.bukuapp.ui.main.MainPresenter;
+
 
 /**
- * Created by amitshekhar on 13/01/17.
+ * adopted from
+ * https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
  */
-
 public abstract class ActivityDependency<P extends MvpPresenter<? extends MvpView>> {
 
     public static MainActivityDependency inject(MainActivity activity) {
@@ -24,7 +25,7 @@ public abstract class ActivityDependency<P extends MvpPresenter<? extends MvpVie
     public abstract P getMvpPresenter();
 
     protected DataManager getDataManager(Context context) {
-        return MyApplication.get(context.getApplicationContext()).getDataManager();
+        return BukuApp.get(context.getApplicationContext()).getDataManager();
     }
 
 

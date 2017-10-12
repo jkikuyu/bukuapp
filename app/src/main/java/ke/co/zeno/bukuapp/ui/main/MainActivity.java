@@ -7,7 +7,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -30,15 +29,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import ke.co.zeno.bukuapp.R;
-import ke.co.zeno.bukuapp.data.local.StreamDataHelper;
+import ke.co.zeno.bukuapp.injection.ActivityDependency;
 import ke.co.zeno.bukuapp.model.Stream;
-import ke.co.zeno.bukuapp.ui.StreamHelperAdapter;
+import ke.co.zeno.bukuapp.ui.base.BaseActivity;
+import ke.co.zeno.bukuapp.ui.main.adapter.StreamHelperAdapter;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements MainMvpView, NavigationView.OnNavigationItemSelectedListener {
+
     private String strURL;
     private String user;
     private String pass;
@@ -47,11 +45,14 @@ public class MainActivity extends AppCompatActivity
     private Spinner spnClasses = null;
     private Toolbar toolbar;
     private static final String TAG = MainActivity.class.getSimpleName();
-    private StreamHelperAdapter streamHelperAdapter;
-    private StreamDataHelper mStreamDataHelper;
+    private MainMvpPresenter<MainMvpView> mMainMvpPresenter;
 
+    private StreamHelperAdapter mStreamHelperAdapter;
+
+/*
     @BindView(R.id.streamsRecycler)
     public RecyclerView streamsRecycler;
+*/
 
     public MainActivity() {
         strURL = "jdbc:postgresql://10.0.3.2:5432/buku";
@@ -59,15 +60,27 @@ public class MainActivity extends AppCompatActivity
         user = "postgres";
         pass = "postgres";
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMainMvpPresenter.detachView();
+    }
+
+    @Override
+    public void showStreams(List<Stream> streamList) {
+        mStreamHelperAdapter.updateList(streamList);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
+
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,24 +88,30 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        ActivityDependency.MainActivityDependency dependency = ActivityDependency.inject(this);
+        mMainMvpPresenter = dependency.getMvpPresenter();
+        mMainMvpPresenter.attachView(this);
         setUpRecyclerView();
+        mMainMvpPresenter.getStreamList();
+
     }
+
     private void setUpRecyclerView() {
 
-        //LinearLayoutManager layoutManagerCenter
-        //        = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        //streamsRecycler.setLayoutManager(layoutManagerCenter);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        streamsRecycler.setLayoutManager(mLayoutManager);
-        mStreamDataHelper = new StreamDataHelper();
-        List<Stream>streams = mStreamDataHelper.getStreamList();
-        streamHelperAdapter = new StreamHelperAdapter(this, streams);
-        streamsRecycler.setAdapter(streamHelperAdapter);
-        SnapHelper streamsSnapHelper = new LinearSnapHelper();
-        streamsSnapHelper.attachToRecyclerView(streamsRecycler);
-
+        LinearLayoutManager layoutManagerCenter
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView streamsRecycler = (RecyclerView)findViewById(R.id.streamsRecycler);
+        streamsRecycler.setLayoutManager(layoutManagerCenter);
+        mStreamHelperAdapter = new StreamHelperAdapter(this);
+        streamsRecycler.setAdapter(mStreamHelperAdapter);
+        SnapHelper snapHelperCenter = new LinearSnapHelper();
+        snapHelperCenter.attachToRecyclerView(streamsRecycler);
 
 /*
         LinearLayoutManager layoutManagerStart
@@ -100,10 +119,10 @@ public class MainActivity extends AppCompatActivity
         startSnapRecyclerView.setLayoutManager(layoutManagerStart);
         appListStartAdapter = new AppListAdapter(this);
         startSnapRecyclerView.setAdapter(appListStartAdapter);
+
         SnapHelper snapHelperStart = new StartSnapHelper();
         snapHelperStart.attachToRecyclerView(startSnapRecyclerView);
 */
-
     }
 
     @Override
@@ -115,6 +134,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,7 +162,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
+
+   @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -183,6 +204,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     public class PopulateList extends AsyncTask<String,Void, String> {
         private Connection dbConn;

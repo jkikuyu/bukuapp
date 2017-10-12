@@ -11,24 +11,21 @@ import ke.co.zeno.bukuapp.model.Stream;
  */
 
 public class StreamDataHelper {
-    public List<Stream> getAppList() {
+    public List<Stream> getStreamList() {
 
-        List<Stream> StreamList = new ArrayList<>();
+        List<Stream> streamList = new ArrayList<>();
 
-        appList.add(new Stream("Std 1", R.drawable.ic_std1));
-        appList.add(new App("Skype", R.drawable.ic_skype));
-        appList.add(new App("Facebook", R.drawable.ic_facebook));
-        appList.add(new App("Google+", R.drawable.ic_gplus));
-        appList.add(new App("Instagram", R.drawable.ic_instagram));
-        appList.add(new App("LinkedIn", R.drawable.ic_linkedin));
-        appList.add(new App("Quora", R.drawable.ic_quora));
-        appList.add(new App("Twitter", R.drawable.ic_twitter));
-        appList.add(new App("Tumblr", R.drawable.ic_tumblr));
-        appList.add(new App("Email", R.drawable.ic_email));
-        appList.add(new App("Gallery", R.drawable.ic_gallery));
+        streamList.add(new Stream("Std 1", R.drawable.ic_std1));
+        streamList.add(new Stream("Std 2", R.drawable.ic_std2));
+        streamList.add(new Stream("Std 3", R.drawable.ic_std3));
+        streamList.add(new Stream("Std 4", R.drawable.ic_std4));
+        streamList.add(new Stream("Std 5", R.drawable.ic_std5));
+        streamList.add(new Stream("Std 6", R.drawable.ic_std6));
+        streamList.add(new Stream("Std 7", R.drawable.ic_std7));
+        streamList.add(new Stream("Std 8", R.drawable.ic_std8));
 
 
-        return appList;
+        return streamList;
     }
 
 }

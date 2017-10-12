@@ -1,6 +1,7 @@
 package ke.co.zeno.bukuapp.ui.main;
 
-import com.mindorks.snaphelperexample.ui.base.MvpPresenter;
+
+import ke.co.zeno.bukuapp.ui.base.MvpPresenter;
 
 /**
  * Created by amitshekhar on 13/01/17.
@@ -8,6 +9,6 @@ import com.mindorks.snaphelperexample.ui.base.MvpPresenter;
 
 public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V> {
 
-    void getAppList();
+    void getStreamList();
 
 }

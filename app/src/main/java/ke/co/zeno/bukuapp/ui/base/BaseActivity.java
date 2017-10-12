@@ -6,7 +6,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 
-import com.mindorks.snaphelperexample.utils.DialogUtils;
+import ke.co.zeno.bukuapp.utils.DialogUtils;
+
 
 /**
  * Created by amitshekhar on 13/01/17.

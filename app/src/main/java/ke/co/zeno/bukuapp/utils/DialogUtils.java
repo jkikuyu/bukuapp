@@ -5,7 +5,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
-import com.mindorks.snaphelperexample.R;
+import ke.co.zeno.bukuapp.R;
+
 
 /**
  * Created by amitshekhar on 13/01/17.

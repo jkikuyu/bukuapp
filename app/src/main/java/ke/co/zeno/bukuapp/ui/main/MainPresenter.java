@@ -1,7 +1,8 @@
 package ke.co.zeno.bukuapp.ui.main;
 
-import com.mindorks.snaphelperexample.data.DataManager;
-import com.mindorks.snaphelperexample.ui.base.BasePresenter;
+
+import ke.co.zeno.bukuapp.data.DataManager;
+import ke.co.zeno.bukuapp.ui.base.BasePresenter;
 
 /**
  * Created by amitshekhar on 13/01/17.
@@ -16,7 +17,9 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     }
 
     @Override
-    public void getAppList() {
-        getMvpView().showApps(mDataManager.getAppList());
+    public void getStreamList() {
+        getMvpView().showStreams(mDataManager.getStreamList());
     }
+
+
 }
