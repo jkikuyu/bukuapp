@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/content_background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ke.co.zeno.bukuapp.ui.main.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+    <SearchView
+        android:id="@+id/search_bar"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtBookList"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/colorPrimary" />
+    <TextView
+        android:id="@+id/streams1"
+        android:layout_below="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/streams_list"
+        android:textColor="@color/colorPrimary" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/streamsRecycler1"
+        android:layout_below="@+id/streams"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="4dp">
+
+    </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:id="@+id/randomList"
+        android:layout_below="@+id/streamsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="left"
+        android:text="@string/random_list"
+        android:textColor="@color/colorPrimary" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/randomBooksRecycler"
+        android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:layout_below="@+id/streams"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
+<!--
+<com.joanzapata.iconify.widget.IconTextView
+android:layout_below="@id/helloword"
+android:text="I {fa-heart-o} to {fa-code} on {fa-android}"
+android:shadowColor="#22000000"
+android:shadowDx="3"
+android:shadowDy="3"
+android:shadowRadius="1"
+android:textSize="40sp"
+android:textColor="#F00"
+android:layout_height="200dp"
+android:layout_width="200dp"/>
+-->

@@ -1,7 +1,34 @@
 <resources>
-    <string name="app_name">TextBook</string>
+    <string name="app_name">Buku</string>
     <string name="action_settings">Settings</string>
     <string name="bookListTitle">Create Book List</string>
     <string name="classSelection">Select Class...</string>
+    <string name="next">next</string>
+    <string name="createlist">Search Book List</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="signin">Sign in</string>
+    <string name="email">Email</string>
+    <string name="create_account">Create a new buku account</string>
+    <string name="new_to_buku">New to Buku</string>
+    <string name="legalmessage">By signing in you are agreeing to our terms listed
+        in the legal information section and our policy notice</string>
+    <string name="createpass">Create password (6+ characters)</string>
+    <string name="createacc">Create account</string>
+    <string name="accountexists">Already have and account?</string>
+    <string name="title">test</string>
+    <string name="home">Home</string>
+    <string name="accdetails">Account Details</string>
+    <string name="bookadded">Books Added</string>
+    <string name="logout">Log Out</string>
+    <string name="random_list">Random books from our list</string>
+    <string name="streams_list">Streams</string>
 
 </resources>

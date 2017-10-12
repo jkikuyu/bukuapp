@@ -1,10 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ke.co.zeno.myapplication.TeacherActivity">
+    tools:context="ke.co.zeno.bukuapp.ui.main.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item android:id="@+id/navigate"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:title="@string/next" />
 </menu>

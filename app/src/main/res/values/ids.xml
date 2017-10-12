@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="drawer_fragment" type="id">drawer_fragment</item>
+    <item name="drawer_layout" type="id">drawer_layout</item>
+    <item name="app_bar" type="id">app_bar</item>
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
+</resources>

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ke.co.zeno.bukuapp.TeacherActivity">
-    <include android:id="@+id/app_bar" layout="@layout/app_bar"/>
+    tools:context="ke.co.zeno.bukuapp.ui.main.MainActivity">
+    <include android:id="@+id/app_bar" layout="@layout/app_bar_main"/>
 
     <TextView
         android:id="@+id/txtBookList"
