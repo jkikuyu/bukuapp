@@ -8,10 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 
 import ke.co.zeno.bukuapp.utils.DialogUtils;
 
-
 /**
- * Created by amitshekhar on 13/01/17.
+ *
+ * https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
+ * @author amitshekhar
+ *  date: 13/01/17.
  */
+
 
 public abstract class BaseActivity extends AppCompatActivity implements MvpView {
 

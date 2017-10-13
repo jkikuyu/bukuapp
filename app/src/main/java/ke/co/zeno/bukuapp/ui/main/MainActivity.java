@@ -1,6 +1,7 @@
 package ke.co.zeno.bukuapp.ui.main;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -35,7 +37,14 @@ import ke.co.zeno.bukuapp.model.Stream;
 import ke.co.zeno.bukuapp.ui.base.BaseActivity;
 import ke.co.zeno.bukuapp.ui.main.adapter.StreamHelperAdapter;
 
-public class MainActivity extends BaseActivity implements MainMvpView, NavigationView.OnNavigationItemSelectedListener {
+
+/**
+ *
+ *  @author Jude Kikuyu
+ *  date: 10/10/2017
+ */
+public class MainActivity extends BaseActivity implements MainMvpView, NavigationView.OnNavigationItemSelectedListener,
+        StreamHelperAdapter.ClickListener{
 
     private String strURL;
     private String user;
@@ -101,7 +110,15 @@ public class MainActivity extends BaseActivity implements MainMvpView, Navigatio
         mMainMvpPresenter.getStreamList();
 
     }
-
+    /**
+     *
+     * https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
+     * @author amitshekhar
+     *  date: 13/01/17.
+     *  modified by
+     *  @author Jude Kikuyu
+     *  date: 10/10/2017
+     */
     private void setUpRecyclerView() {
 
         LinearLayoutManager layoutManagerCenter
@@ -155,7 +172,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, Navigatio
                         .colorRes(R.color.ab_icon)
                         .actionBarSize());
         menuNav.findItem(R.id.nav_access).setIcon(
-                new IconDrawable(this, EntypoIcons.entypo_log_out)
+                new IconDrawable(this, EntypoIcons.entypo_login)
                         .colorRes(R.color.ab_icon)
                         .actionBarSize());
 
@@ -183,6 +200,13 @@ public class MainActivity extends BaseActivity implements MainMvpView, Navigatio
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        switch(id){
+            case R.id.nav_access:
+                Intent intent = new Intent(this, SignIn.class);
+                this.startActivity(intent);
+                break;
+        }
+
 
 /*
         if (id == R.id.nav_camera1) {
@@ -204,6 +228,14 @@ public class MainActivity extends BaseActivity implements MainMvpView, Navigatio
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void itemClicked(View view, int position) {
+            Intent intent1 = new Intent(this, SignIn.class);
+            this.startActivity(intent1);
+    }
+
+
 
 
     public class PopulateList extends AsyncTask<String,Void, String> {

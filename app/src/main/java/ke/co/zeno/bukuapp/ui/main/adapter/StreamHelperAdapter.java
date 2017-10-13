@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import ke.co.zeno.bukuapp.model.Stream;
 
 public class StreamHelperAdapter extends RecyclerView.Adapter<StreamHelperAdapter.StreamViewHolder> {
     Context context;
+    ClickListener clickListener;
     List <Stream> streamList;
     public StreamHelperAdapter(Context context){
         this.context = context;
@@ -55,7 +57,7 @@ public class StreamHelperAdapter extends RecyclerView.Adapter<StreamHelperAdapte
         return streamList.size();
     }
 
-    public class StreamViewHolder extends RecyclerView.ViewHolder{
+    public class StreamViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
         @BindView(R.id.streamIcon)
         ImageView streamIcon;
         @BindView(R.id.streamName)
@@ -63,6 +65,7 @@ public class StreamHelperAdapter extends RecyclerView.Adapter<StreamHelperAdapte
 
         public StreamViewHolder(View streamView) {
             super(streamView);
+            streamView.setOnClickListener(this);
             ButterKnife.bind(this, streamView);
 
         }
@@ -73,6 +76,20 @@ public class StreamHelperAdapter extends RecyclerView.Adapter<StreamHelperAdapte
                     .load(stream.drawable)
                     .into(streamIcon);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener !=null){
+                clickListener.itemClicked(v, getAdapterPosition());
+            }
+        }
+    }
+    public interface ClickListener {
+        void itemClicked(View view, int position);
+    }
+
+    public void setClickListener(ClickListener clickListener){
+        this.clickListener = clickListener;
     }
 
 }

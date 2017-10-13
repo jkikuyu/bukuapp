@@ -14,9 +14,9 @@ import ke.co.zeno.bukuapp.data.DataManager;
 import ke.co.zeno.bukuapp.injection.ApplicationDependency;
 
 /**
- * Created by nimda on 05/10/17.
+ *  @author Jude Kikuyu
+ *  date: 10/10/2017
  */
-
 public class BukuApp extends Application {
     private ApplicationDependency applicationDependency;
 

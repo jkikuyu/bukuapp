@@ -9,9 +9,11 @@ import ke.co.zeno.bukuapp.R;
 
 
 /**
- * Created by amitshekhar on 13/01/17.
+ *
+ * https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
+ * @author amitshekhar
+ *  date: 13/01/17.
  */
-
 public class DialogUtils {
 
     private DialogUtils() {

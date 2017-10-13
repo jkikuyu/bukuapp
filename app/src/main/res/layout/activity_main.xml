@@ -10,28 +10,20 @@
     tools:openDrawer="start">
 
 
-    <LinearLayout
-        tools:context="ke.co.zeno.bukuapp.ui.main.MainActivity"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.design.widget.AppBarLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:theme="@style/BukuToolBarTheme"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-        </android.support.design.widget.AppBarLayout>
-<!--        <include
-            layout="@layout/app_bar_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/content_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:background="@color/content_background"
+                    android:orientation="vertical"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:context="ke.co.zeno.bukuapp.ui.main.MainActivity">
         <SearchView
             android:id="@+id/search_bar"
             android:background="@color/colorPrimaryDark"
@@ -39,10 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtBookList"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="56dp"
             android:textColor="@color/colorPrimary" />
         <TextView
-            android:id="@+id/streams"
+            android:id="@+id/streams1"
             android:layout_below="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,13 +51,45 @@
             android:padding="4dp">
 
         </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/randomList"
+            android:layout_below="@+id/streamsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="left"
+            android:text="@string/random_list"
+            android:textColor="@color/colorPrimary" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/randomBooksRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_below="@+id/streams"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
-      </android.support.v4.widget.DrawerLayout>
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
     <!--
           <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">

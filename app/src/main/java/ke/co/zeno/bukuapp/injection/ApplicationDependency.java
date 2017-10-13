@@ -6,9 +6,11 @@ import android.content.Context;
 import ke.co.zeno.bukuapp.data.DataManager;
 import ke.co.zeno.bukuapp.data.local.StreamDataHelper;
 
-
 /**
- * Created by amitshekhar on 13/01/17.
+ *
+ * https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
+ * @author amitshekhar
+ *  date: 13/01/17.
  */
 
 public class ApplicationDependency {

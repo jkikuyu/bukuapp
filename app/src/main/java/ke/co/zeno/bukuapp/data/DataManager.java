@@ -6,9 +6,10 @@ import ke.co.zeno.bukuapp.data.local.StreamDataHelper;
 import ke.co.zeno.bukuapp.model.Stream;
 
 /**
- * Created by Jude Kikuyu on 09/10/17.
+ *
+ *  @author Jude Kikuyu
+ *  date: 10/10/2017
  */
-
 public class DataManager {
     private final StreamDataHelper mStreamDataHelper;
 

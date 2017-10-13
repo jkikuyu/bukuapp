@@ -30,5 +30,6 @@
     <string name="logout">Log Out</string>
     <string name="random_list">Random books from our list</string>
     <string name="streams_list">Streams</string>
+    <string name="login">Log in</string>
 
 </resources>

@@ -13,8 +13,10 @@ import ke.co.zeno.bukuapp.ui.main.MainPresenter;
 
 
 /**
- * adopted from
+ *
  * https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
+ * @author amitshekhar
+ *  date: 13/01/17.
  */
 public abstract class ActivityDependency<P extends MvpPresenter<? extends MvpView>> {
 

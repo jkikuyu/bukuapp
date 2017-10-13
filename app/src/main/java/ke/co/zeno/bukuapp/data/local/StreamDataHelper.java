@@ -7,7 +7,8 @@ import ke.co.zeno.bukuapp.R;
 import ke.co.zeno.bukuapp.model.Stream;
 
 /**
- * Created by nimda on 09/10/17.
+ *  @author Jude Kikuyu
+ *  date: 10/10/2017
  */
 
 public class StreamDataHelper {

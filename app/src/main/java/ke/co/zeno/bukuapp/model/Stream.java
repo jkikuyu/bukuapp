@@ -1,7 +1,8 @@
 package ke.co.zeno.bukuapp.model;
 
 /**
- * Created by Jude Kikuyu on 09/10/17.
+ *  @author Jude Kikuyu
+ *  date: 10/10/2017
  */
 
 public class Stream {
