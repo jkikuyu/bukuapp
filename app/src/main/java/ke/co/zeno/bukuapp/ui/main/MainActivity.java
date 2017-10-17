@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +17,6 @@ import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -32,9 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ke.co.zeno.bukuapp.R;
-import ke.co.zeno.bukuapp.injection.ActivityDependency;
-import ke.co.zeno.bukuapp.model.Stream;
-import ke.co.zeno.bukuapp.ui.base.BaseActivity;
 import ke.co.zeno.bukuapp.ui.main.adapter.StreamHelperAdapter;
 
 
@@ -43,8 +41,7 @@ import ke.co.zeno.bukuapp.ui.main.adapter.StreamHelperAdapter;
  *  @author Jude Kikuyu
  *  date: 10/10/2017
  */
-public class MainActivity extends BaseActivity implements MainMvpView, NavigationView.OnNavigationItemSelectedListener,
-        StreamHelperAdapter.ClickListener{
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
     private String strURL;
     private String user;
@@ -54,7 +51,6 @@ public class MainActivity extends BaseActivity implements MainMvpView, Navigatio
     private Spinner spnClasses = null;
     private Toolbar toolbar;
     private static final String TAG = MainActivity.class.getSimpleName();
-    private MainMvpPresenter<MainMvpView> mMainMvpPresenter;
 
     private StreamHelperAdapter mStreamHelperAdapter;
 
@@ -72,13 +68,8 @@ public class MainActivity extends BaseActivity implements MainMvpView, Navigatio
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mMainMvpPresenter.detachView();
     }
 
-    @Override
-    public void showStreams(List<Stream> streamList) {
-        mStreamHelperAdapter.updateList(streamList);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,13 +92,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, Navigatio
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-        ActivityDependency.MainActivityDependency dependency = ActivityDependency.inject(this);
-        mMainMvpPresenter = dependency.getMvpPresenter();
-        mMainMvpPresenter.attachView(this);
         setUpRecyclerView();
-        mMainMvpPresenter.getStreamList();
 
     }
     /**
@@ -228,15 +213,6 @@ public class MainActivity extends BaseActivity implements MainMvpView, Navigatio
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    @Override
-    public void itemClicked(View view, int position) {
-            Intent intent1 = new Intent(this, SignIn.class);
-            this.startActivity(intent1);
-    }
-
-
-
 
     public class PopulateList extends AsyncTask<String,Void, String> {
         private Connection dbConn;

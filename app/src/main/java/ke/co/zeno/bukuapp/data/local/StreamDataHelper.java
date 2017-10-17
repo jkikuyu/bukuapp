@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ke.co.zeno.bukuapp.R;
+import ke.co.zeno.bukuapp.data.DataManager;
 import ke.co.zeno.bukuapp.model.Stream;
 
 /**
@@ -11,7 +12,7 @@ import ke.co.zeno.bukuapp.model.Stream;
  *  date: 10/10/2017
  */
 
-public class StreamDataHelper {
+public class StreamDataHelper implements DataManager {
     public List<Stream> getStreamList() {
 
         List<Stream> streamList = new ArrayList<>();
