@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ke.co.zeno.bukuapp.R;
+import ke.co.zeno.bukuapp.data.local.StreamDataHelper;
+import ke.co.zeno.bukuapp.model.Stream;
 import ke.co.zeno.bukuapp.ui.main.adapter.StreamHelperAdapter;
 
 
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
      *
      * https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
      * @author amitshekhar
-     *  date: 13/01/17.
+     *  dat.e: 13/01/17.
      *  modified by
      *  @author Jude Kikuyu
      *  date: 10/10/2017
@@ -111,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         RecyclerView streamsRecycler = (RecyclerView)findViewById(R.id.streamsRecycler);
         streamsRecycler.setLayoutManager(layoutManagerCenter);
         mStreamHelperAdapter = new StreamHelperAdapter(this);
+        List<Stream> streamList = new StreamDataHelper().getStreamList();
+        mStreamHelperAdapter.updateList(streamList);
         streamsRecycler.setAdapter(mStreamHelperAdapter);
         SnapHelper snapHelperCenter = new LinearSnapHelper();
         snapHelperCenter.attachToRecyclerView(streamsRecycler);
