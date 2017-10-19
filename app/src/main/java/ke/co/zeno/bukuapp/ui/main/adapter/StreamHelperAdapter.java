@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,7 +27,7 @@ import ke.co.zeno.bukuapp.model.Stream;
 public class StreamHelperAdapter extends RecyclerView.Adapter<StreamHelperAdapter.StreamViewHolder> {
     Context context;
     ClickListener clickListener;
-    List <Stream> streamList;
+    List <Stream> streamList = Collections.emptyList();
     public StreamHelperAdapter(Context context){
         this.context = context;
         streamList = new ArrayList<>();
