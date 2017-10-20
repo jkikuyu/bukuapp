@@ -31,5 +31,6 @@
     <string name="random_list">Random books from our list</string>
     <string name="streams_list">Streams</string>
     <string name="login">Log in</string>
+    <string name="subject_list">Subjects</string>
 
 </resources>
