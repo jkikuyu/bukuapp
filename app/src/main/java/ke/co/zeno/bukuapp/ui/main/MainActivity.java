@@ -6,14 +6,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,8 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ke.co.zeno.bukuapp.R;
-import ke.co.zeno.bukuapp.data.local.StreamDataHelper;
-import ke.co.zeno.bukuapp.model.Stream;
 import ke.co.zeno.bukuapp.ui.main.adapter.StreamHelperAdapter;
 
 
@@ -91,10 +87,15 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         toggle.syncState();
 
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        setUpRecyclerView();
+        //setUpRecyclerView();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+        StreamFragment streamFragment = new StreamFragment();
+        fragmentTransaction.add(R.id.fragment_container, streamFragment, "streams");
+        fragmentTransaction.commit();
+
 
     }
     /**
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
      *  @author Jude Kikuyu
      *  date: 10/10/2017
      */
-    private void setUpRecyclerView() {
+  /*  private void setUpRecyclerView() {
 
         LinearLayoutManager layoutManagerCenter
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         SnapHelper snapHelperCenter = new LinearSnapHelper();
         snapHelperCenter.attachToRecyclerView(streamsRecycler);
 
-/*
+
         LinearLayoutManager layoutManagerStart
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         startSnapRecyclerView.setLayoutManager(layoutManagerStart);
@@ -128,9 +129,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         SnapHelper snapHelperStart = new StartSnapHelper();
         snapHelperStart.attachToRecyclerView(startSnapRecyclerView);
-*/
-    }
 
+    }
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
