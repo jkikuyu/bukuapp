@@ -1,28 +1,14 @@
 package ke.co.zeno.bukuapp.ui.main;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.joanzapata.iconify.IconDrawable;
-import com.joanzapata.iconify.fonts.EntypoIcons;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
-import com.joanzapata.iconify.fonts.MaterialIcons;
-
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -31,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ke.co.zeno.bukuapp.R;
-import ke.co.zeno.bukuapp.ui.main.adapter.StreamHelperAdapter;
+import ke.co.zeno.bukuapp.base.BaseActivity;
+import ke.co.zeno.bukuapp.data.DatabaseHelper;
 
 
 /**
@@ -39,25 +26,24 @@ import ke.co.zeno.bukuapp.ui.main.adapter.StreamHelperAdapter;
  *  @author Jude Kikuyu
  *  date: 10/10/2017
  */
-public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
-
+public class HomeActivity extends BaseActivity{
     private String strURL;
     private String user;
     private String pass;
     private ProgressDialog pDialog;
     private List<String> classList =null;
     private Spinner spnClasses = null;
-    private Toolbar toolbar;
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private DatabaseHelper dbHelper;
 
-    private StreamHelperAdapter mStreamHelperAdapter;
+    private static final String TAG = HomeActivity.class.getSimpleName();
+
 
 /*
     @BindView(R.id.streamsRecycler)
     public RecyclerView streamsRecycler;
 */
 
-    public MainActivity() {
+    public HomeActivity() {
         strURL = "jdbc:postgresql://10.0.3.2:5432/buku";
                 //jdbc:postgresql://127.0.0.1:5432/testdb
         user = "postgres";
@@ -72,38 +58,27 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        dbHelper = new DatabaseHelper(this);
+        try {
+            dbHelper.createDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        super.setContentView(R.layout.activity_home);
         //ButterKnife.bind(this);
 
-
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        //setUpRecyclerView();
+/*
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
         StreamFragment streamFragment = new StreamFragment();
         fragmentTransaction.add(R.id.fragment_container, streamFragment, "streams");
         fragmentTransaction.commit();
-
+*/
 
     }
     /**
      *
-     * https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
-     * @author amitshekhar
-     *  dat.e: 13/01/17.
-     *  modified by
      *  @author Jude Kikuyu
      *  date: 10/10/2017
      */
@@ -135,89 +110,23 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        int fragmentCount = 0;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            fragmentCount = getSupportFragmentManager().getBackStackEntryCount();
+            if (fragmentCount > 1) {
+                getFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
+
         }
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
-        Menu menuNav = mNavigationView.getMenu();
-        menuNav.findItem(R.id.nav_home).setIcon(
-                new IconDrawable(this, FontAwesomeIcons.fa_home)
-                        .colorRes(R.color.ab_icon)
-                        .actionBarSize());
-        menuNav.findItem(R.id.nav_settings).setIcon(
-                new IconDrawable(this, MaterialIcons.md_settings_applications)
-                        .colorRes(R.color.ab_icon)
-                        .actionBarSize());
-        menuNav.findItem(R.id.nav_books).setIcon(
-                new IconDrawable(this, FontAwesomeIcons.fa_book)
-                        .colorRes(R.color.ab_icon)
-                        .actionBarSize());
-        menuNav.findItem(R.id.nav_access).setIcon(
-                new IconDrawable(this, EntypoIcons.entypo_login)
-                        .colorRes(R.color.ab_icon)
-                        .actionBarSize());
-
-        return true;
-    }
 
 
-   @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        switch(id){
-            case R.id.nav_access:
-                Intent intent = new Intent(this, SignIn.class);
-                this.startActivity(intent);
-                break;
-        }
-
-
-/*
-        if (id == R.id.nav_camera1) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-*/
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
     public class PopulateList extends AsyncTask<String,Void, String> {
         private Connection dbConn;
@@ -226,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         protected void onPreExecute() {
 
             super.onPreExecute();
-            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog = new ProgressDialog(HomeActivity.this);
             pDialog.setMessage("Fetching classes ...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -291,6 +200,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         // attaching data adapter to spinner
         spnClasses.setAdapter(spinnerAdapter);
     }
-
+    public DatabaseHelper getDbHelper(){
+        return dbHelper;
+    }
 }
 

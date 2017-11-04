@@ -1,6 +1,7 @@
 package ke.co.zeno.bukuapp.ui.main;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import ke.co.zeno.bukuapp.R;
+import ke.co.zeno.bukuapp.data.DatabaseHelper;
 import ke.co.zeno.bukuapp.data.local.StreamDataHelper;
 import ke.co.zeno.bukuapp.model.Stream;
 import ke.co.zeno.bukuapp.ui.main.adapter.StreamHelperAdapter;
@@ -32,12 +34,15 @@ public class StreamFragment extends Fragment implements StreamHelperAdapter.Clic
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "dbHelper";
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private StreamHelperAdapter mStreamHelperAdapter;
     private View rootView;
+    private DatabaseHelper dbHelper;
 
     public StreamFragment() {
         // Required empty public constructor
@@ -52,7 +57,7 @@ public class StreamFragment extends Fragment implements StreamHelperAdapter.Clic
      * @return A new instance of fragment StreamFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StreamFragment newInstance(String param1, String param2) {
+    public static StreamFragment newInstance(String param1, String param2, DatabaseHelper dbHelper) {
         StreamFragment fragment = new StreamFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -81,14 +86,16 @@ public class StreamFragment extends Fragment implements StreamHelperAdapter.Clic
         return rootView;
     }
     private void setUpRecyclerView() {
-
+        Activity mActivity = getActivity();
         LinearLayoutManager layoutManagerCenter
-                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                = new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView streamsRecycler = (RecyclerView)rootView.findViewById(R.id.streamsRecycler);
         streamsRecycler.setLayoutManager(layoutManagerCenter);
-        mStreamHelperAdapter = new StreamHelperAdapter(getActivity());
+        mStreamHelperAdapter = new StreamHelperAdapter(mActivity);
         mStreamHelperAdapter.setClickListener(this);
-        List<Stream> streamList = new StreamDataHelper().getStreamList();
+
+        List<Stream> streamList = new StreamDataHelper().getItemList();
+
         mStreamHelperAdapter.updateList(streamList);
         streamsRecycler.setAdapter(mStreamHelperAdapter);
         SnapHelper snapHelperCenter = new LinearSnapHelper();
@@ -109,11 +116,16 @@ public class StreamFragment extends Fragment implements StreamHelperAdapter.Clic
 
     @Override
     public void itemClicked(View view, int position) {
+        position +=1; // add 1 to the position to get the stream
+        String pos = Integer.toString(position);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SubjectFragment subjectFragment = new SubjectFragment();
-        fragmentTransaction.replace(R.id.fragment_container, subjectFragment, "subjects");
+        subjectFragment.newInstance("stream",pos);
+
+        fragmentTransaction.replace(R.id.fragment_container, subjectFragment, "subjects").
+                addToBackStack(null);
         fragmentTransaction.commit();
 
     }

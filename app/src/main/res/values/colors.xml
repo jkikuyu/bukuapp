@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="ab_icon">#FFF</color>
     <color name="content_background">#EEE</color>
+    <color name="camera_icon">#696969</color>
+
     <color name="link">#0000EE</color>
 
 </resources>

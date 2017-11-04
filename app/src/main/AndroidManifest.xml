@@ -3,6 +3,8 @@
           package="ke.co.zeno.bukuapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera"></uses-feature>
 
     <application
         android:name=".BukuApp"
@@ -11,7 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".base.BaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -19,7 +21,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.SignUp"/>
-        <activity android:name=".ui.main.SignIn">
+        <activity android:name=".ui.main.SignIn"/>
+        <activity android:name=".ui.main.HomeActivity" android:label="@string/title_activity_home"/>
+
+        <activity
+            android:name=".ui.main.CameraActivity"
+            android:label="@string/title_activity_camera"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 

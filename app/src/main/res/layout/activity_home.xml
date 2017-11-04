@@ -13,7 +13,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     xmlns:tools="http://schemas.android.com/tools"
-                    android:id="@+id/content_main"
+                    android:id="@+id/content_home"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -23,7 +23,7 @@
                     android:background="@color/content_background"
                     android:orientation="vertical"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    tools:context="ke.co.zeno.bukuapp.ui.main.MainActivity">
+                    tools:context="ke.co.zeno.bukuapp.ui.main.HomeActivity">
         <SearchView
             android:id="@+id/search_bar"
             android:background="@color/colorPrimaryDark"
@@ -36,8 +36,9 @@
         <LinearLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_height="wrap_content">
+            >
         </LinearLayout>
 
 

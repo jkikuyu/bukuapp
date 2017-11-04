@@ -1,8 +1,8 @@
 package ke.co.zeno.bukuapp.data;
 
-import java.util.List;
+import android.database.Cursor;
 
-import ke.co.zeno.bukuapp.model.Stream;
+import java.util.List;
 
 /**
  *
@@ -11,6 +11,11 @@ import ke.co.zeno.bukuapp.model.Stream;
  */
 public interface DataManager {
 
-    public List<Stream> getStreamList();
+    public List <?> getItemList();
+    public void insert(String name, String desc) ;
+    public Cursor fetch(String qry);
+    public int update(long _id, String name, String desc);
+    public void delete(long _id);
+
 }
 

@@ -1,5 +1,7 @@
 package ke.co.zeno.bukuapp.data.local;
 
+import android.database.Cursor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import ke.co.zeno.bukuapp.model.Stream;
  */
 
 public class StreamDataHelper implements DataManager {
-    public List<Stream> getStreamList() {
+    public List<Stream> getItemList() {
 
         List<Stream> streamList = new ArrayList<>();
 
@@ -28,6 +30,26 @@ public class StreamDataHelper implements DataManager {
 
 
         return streamList;
+    }
+
+    @Override
+    public void insert(String name, String desc) {
+
+    }
+
+    @Override
+    public Cursor fetch(String qry) {
+        return null;
+    }
+
+    @Override
+    public int update(long _id, String name, String desc) {
+        return 0;
+    }
+
+    @Override
+    public void delete(long _id) {
+
     }
 
 }

@@ -15,27 +15,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.security.auth.Subject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ke.co.zeno.bukuapp.R;
-import ke.co.zeno.bukuapp.model.Stream;
+import ke.co.zeno.bukuapp.model.Subject;
 
 /**
  * Created by nimda on 09/10/17.
  */
 
-public class SubjectHelperAdapter extends RecyclerView.Adapter<SubjectHelperAdapter.StreamViewHolder> {
+public class SubjectHelperAdapter extends RecyclerView.Adapter<SubjectHelperAdapter.SubjectViewHolder> {
     Context context;
     ClickListener clickListener;
-    List <Subj> streamList = Collections.emptyList();
+    List <Subject> subjectList = Collections.emptyList();
     public SubjectHelperAdapter(Context context){
         this.context = context;
-        streamList = new ArrayList<>();
+        subjectList = new ArrayList<>();
     }
-    public void updateList(List<Stream> streamList) {
-        this.streamList = streamList;
+    public void updateList(List<Subject> subjectList) {
+        this.subjectList = subjectList;
         notifyDataSetChanged();
     }
 
@@ -43,14 +41,14 @@ public class SubjectHelperAdapter extends RecyclerView.Adapter<SubjectHelperAdap
 
 
     @Override
-    public StreamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.stream_list_row, parent, false);
-        StreamViewHolder viewHolder = new StreamViewHolder(view);
+    public SubjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.subject_list_row, parent, false);
+        SubjectViewHolder viewHolder = new SubjectViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(StreamViewHolder holder, int position) {
+    public void onBindViewHolder(SubjectViewHolder holder, int position) {
 
         holder.onBind(position);
     }
@@ -60,24 +58,24 @@ public class SubjectHelperAdapter extends RecyclerView.Adapter<SubjectHelperAdap
         return subjectList.size();
     }
 
-    public class StreamViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
-        @BindView(R.id.streamIcon)
-        ImageView streamIcon;
-        @BindView(R.id.streamName)
-        TextView streamName;
+    public class SubjectViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
+        @BindView(R.id.subjectIcon)
+        ImageView subjectIcon;
+        @BindView(R.id.subjectName)
+        TextView subjectName;
 
-        public StreamViewHolder(View streamView) {
-            super(streamView);
-            streamView.setOnClickListener(this);
-            ButterKnife.bind(this, streamView);
+        public SubjectViewHolder(View subjectView) {
+            super(subjectView);
+            subjectView.setOnClickListener(this);
+            ButterKnife.bind(this, subjectView);
 
         }
         public void onBind(final int position) {
-            final Stream stream = streamList.get(position);
-            streamName.setText(stream.name);
+            final Subject subject = subjectList.get(position);
+            subjectName.setText(subject.name);
             Glide.with(context)
-                    .load(stream.drawable)
-                    .into(streamIcon);
+                    .load(subject.drawable)
+                    .into(subjectIcon);
         }
 
         @Override

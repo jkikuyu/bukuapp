@@ -32,5 +32,8 @@
     <string name="streams_list">Streams</string>
     <string name="login">Log in</string>
     <string name="subject_list">Subjects</string>
+    <string name="title_activity_camera">Add Book</string>
+    <string name="book_capture">Capture</string>
+    <string name="title_activity_home">Buku  Home</string>
 
 </resources>
