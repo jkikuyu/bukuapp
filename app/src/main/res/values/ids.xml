@@ -4,5 +4,6 @@
     <item name="drawer_layout" type="id">drawer_layout</item>
     <item name="app_bar" type="id">app_bar</item>
     <item name="visible" type="id"/>
+
     <item name="masked" type="id"/>
 </resources>

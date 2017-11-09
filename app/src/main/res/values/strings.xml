@@ -35,5 +35,9 @@
     <string name="title_activity_camera">Add Book</string>
     <string name="book_capture">Capture</string>
     <string name="title_activity_home">Buku  Home</string>
+    <string name="book_price">Price</string>
+    <string name="book_title">Title</string>
+    <string name="book_condition">Condition</string>
+    <string name="owner_comment">Additional Comment</string>
 
 </resources>

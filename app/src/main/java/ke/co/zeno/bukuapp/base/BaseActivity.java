@@ -28,7 +28,9 @@ import ke.co.zeno.bukuapp.ui.main.SignIn;
 
 
 /**
- * Created by nimda on 21/10/17.
+ * @author Jude Kikuyu
+ * date: 21/10/17.
+ * ref: https://stackoverflow.com/questions/19451715/same-navigation-drawer-in-different-activities
  */
 
 public class BaseActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {

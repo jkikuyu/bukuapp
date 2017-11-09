@@ -3,6 +3,8 @@ package ke.co.zeno.bukuapp.ui.main;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
@@ -68,13 +70,13 @@ public class HomeActivity extends BaseActivity{
         super.setContentView(R.layout.activity_home);
         //ButterKnife.bind(this);
 
-/*
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
         StreamFragment streamFragment = new StreamFragment();
         fragmentTransaction.add(R.id.fragment_container, streamFragment, "streams");
         fragmentTransaction.commit();
-*/
+
 
     }
     /**

@@ -2,7 +2,6 @@ package ke.co.zeno.bukuapp.data.local;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,6 @@ public class BookDataHelper implements DataManager {
                 book.setLevel(items.getInt(4));
                 book.setPrice(items.getDouble(5));
                 book.setImage(items.getString(6));
-                Log.d("test", book.getImage());
                 bookList.add(book);
 
             } while (items.moveToNext()); //move to next row in the query result
