@@ -1,6 +1,7 @@
 package ke.co.zeno.bukuapp.data.local;
 
 import android.database.Cursor;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import ke.co.zeno.bukuapp.model.Stream;
  */
 
 public class StreamDataHelper implements DataManager {
-    public List<Stream> getItemList() {
+    public List<Stream> getItemList(Bundle bundle) {
 
         List<Stream> streamList = new ArrayList<>();
 

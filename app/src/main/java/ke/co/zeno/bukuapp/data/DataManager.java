@@ -1,6 +1,7 @@
 package ke.co.zeno.bukuapp.data;
 
 import android.database.Cursor;
+import android.os.Bundle;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public interface DataManager {
 
-    public List <?> getItemList();
+    public List <?> getItemList(Bundle bundle);
     public void insert(String name, String desc) ;
     public Cursor fetch(String qry);
     public int update(long _id, String name, String desc);

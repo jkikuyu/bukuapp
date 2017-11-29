@@ -1,6 +1,7 @@
 package ke.co.zeno.bukuapp.data.local;
 
 import android.database.Cursor;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import ke.co.zeno.bukuapp.model.Subject;
  */
 
 public class SubjectDataHelper implements DataManager {
-    public List<Subject> getItemList() {
+    public List<Subject> getItemList(Bundle bundle) {
 
         List<Subject> subjectList = new ArrayList<>();
 

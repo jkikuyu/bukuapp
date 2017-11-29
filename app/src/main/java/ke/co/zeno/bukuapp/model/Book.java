@@ -14,7 +14,8 @@ public class Book {
     private Integer level;
     private Double price;
     private String image;
-    private int drawable;
+    private Integer drawable;
+    private Integer subject;
     public Book() {
 
 
@@ -47,6 +48,10 @@ public class Book {
     public String getImage() {
         return image;
     }
+    public Integer getSubject() {
+        return subject;
+
+    }
     public void setTitle(String title) {
         this.title = title;
     }
@@ -73,5 +78,14 @@ public class Book {
     public void setLevel(Integer level) {
         this.level = level;
     }
+
+    public void setDrawable(Integer drawable) {
+        this.drawable = drawable;
+    }
+
+    public void setSubject(Integer subject) {
+        this.subject = subject;
+    }
+
 
 }

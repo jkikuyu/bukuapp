@@ -37,6 +37,7 @@ public class BookFragment extends Fragment implements BookHelperAdapter.ClickLis
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -53,16 +54,18 @@ public class BookFragment extends Fragment implements BookHelperAdapter.ClickLis
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * //@param param1 Parameter 1.
+     * //@param param2 Parameter 2.
      * @return A new instance of fragment BookFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BookFragment newInstance(String param1, String param2) {
+    public static BookFragment newInstance(Bundle args) {
         BookFragment fragment = new BookFragment();
-        Bundle args = new Bundle();
+/*
+        args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+*/
         fragment.setArguments(args);
         return fragment;
     }
@@ -93,6 +96,7 @@ public class BookFragment extends Fragment implements BookHelperAdapter.ClickLis
     }
     private void setUpRecyclerView() {
 
+
         LinearLayoutManager layoutManagerCenter
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView booksRecycler = (RecyclerView)rootView.findViewById(R.id.booksRecycler);
@@ -100,7 +104,10 @@ public class BookFragment extends Fragment implements BookHelperAdapter.ClickLis
         mBookHelperAdapter = new BookHelperAdapter(getActivity());
         mBookHelperAdapter.setClickListener(this);
         BookDataHelper bookDataHelper = new BookDataHelper(dbHelper);
-        List<Book> bookList = bookDataHelper.getItemList();
+        Bundle bundle = this.getArguments();
+
+
+        List<Book> bookList = bookDataHelper.getItemList(bundle);
         mBookHelperAdapter.updateList(bookList);
 
         booksRecycler.setAdapter(mBookHelperAdapter);
@@ -122,15 +129,15 @@ public class BookFragment extends Fragment implements BookHelperAdapter.ClickLis
 
     @Override
     public void itemClicked(View view, int position) {
-        Bundle bundle = new Bundle();
         position +=1; // add 1 to the position to get the book
         String pos = Integer.toString(position);
-        bundle.putString("book",pos);
-
+        Bundle args = this.getArguments();
+        args.putString("book",pos);
+    // to be done
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SubjectFragment subjectFragment = new SubjectFragment();
-        subjectFragment.setArguments(bundle);
+        subjectFragment.setArguments(args);
 
         fragmentTransaction.replace(R.id.fragment_container, subjectFragment, "subjects");
         fragmentTransaction.commit();

@@ -2,6 +2,7 @@ package ke.co.zeno.bukuapp.data.local;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,10 @@ public class BookDataHelper implements DataManager {
         this.dbHelper = dbHelper;
         db = dbHelper.getDb();
     }
-    public List<Book> getItemList() {
-            String sql = "select * from Book;";
+    public List<Book> getItemList(Bundle bundle) {
+            String subject = bundle.getString("subject");
+            String stream = bundle.getString("stream");
+            String sql = "select * from Book where level=" +stream + " and subject=" + subject ;
             Cursor items = fetch(sql);
             List<Book> bookList = new ArrayList<>();
 
