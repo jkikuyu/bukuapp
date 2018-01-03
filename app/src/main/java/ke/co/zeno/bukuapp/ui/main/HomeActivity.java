@@ -116,7 +116,7 @@ public class HomeActivity extends BaseActivity{
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            fragmentCount = getSupportFragmentManager().getBackStackEntryCount();
+            fragmentCount = getFragmentManager().getBackStackEntryCount();
             if (fragmentCount > 1) {
                 getFragmentManager().popBackStack();
             } else {

@@ -9,7 +9,7 @@
         android:layout_below="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/subject_list"
+        android:text="@string/book_list"
         android:textColor="@color/colorPrimary" />
 
 

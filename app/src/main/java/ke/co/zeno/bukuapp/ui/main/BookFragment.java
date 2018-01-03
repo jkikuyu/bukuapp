@@ -1,10 +1,9 @@
 package ke.co.zeno.bukuapp.ui.main;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +11,11 @@ import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import ke.co.zeno.bukuapp.R;
@@ -42,6 +44,8 @@ public class BookFragment extends Fragment implements BookHelperAdapter.ClickLis
     private String mParam1;
     private String mParam2;
     private BookHelperAdapter mBookHelperAdapter;
+    private List<Book> books, bookList;
+    private int count;
     private View rootView;
     private DatabaseHelper dbHelper;
 
@@ -83,17 +87,19 @@ public class BookFragment extends Fragment implements BookHelperAdapter.ClickLis
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_book, container, false);
+
         rootView.setTag(TAG);
         setUpRecyclerView();
-
         return rootView;
     }
+
     private void setUpRecyclerView() {
 
 
@@ -107,8 +113,9 @@ public class BookFragment extends Fragment implements BookHelperAdapter.ClickLis
         Bundle bundle = this.getArguments();
 
 
-        List<Book> bookList = bookDataHelper.getItemList(bundle);
-        mBookHelperAdapter.updateList(bookList);
+        books = bookDataHelper.getItemList(bundle);
+        bookList = new ArrayList<>();
+        mBookHelperAdapter.updateList(books);
 
         booksRecycler.setAdapter(mBookHelperAdapter);
         SnapHelper snapHelperCenter = new LinearSnapHelper();
@@ -127,22 +134,30 @@ public class BookFragment extends Fragment implements BookHelperAdapter.ClickLis
 
     }
 
+
     @Override
     public void itemClicked(View view, int position) {
-        position +=1; // add 1 to the position to get the book
-        String pos = Integer.toString(position);
-        Bundle args = this.getArguments();
-        args.putString("book",pos);
-    // to be done
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        SubjectFragment subjectFragment = new SubjectFragment();
-        subjectFragment.setArguments(args);
 
-        fragmentTransaction.replace(R.id.fragment_container, subjectFragment, "subjects");
-        fragmentTransaction.commit();
+        //ref http://stacktips.com/tutorials/android/android-recyclerview-example
+        //https://stackoverflow.com/questions/6087198/passing-a-list-to-another-activity-in-android
+        //https://stackoverflow.com/questions/34906569/how-can-i-display-items-details-from-a-recyclerview-when-the-item-is-clicked
+        //position +=1; add 1 to the position to get the book
+       // String pos = Integer.toString(position);
+        Context context = getContext();
+        count++;
+        Bundle args = this.getArguments();
+        Book book = books.get(position);
+        bookList.add(book);
+        String sCount = Integer.toString(count);
+        TextView itView = (TextView) getActivity().findViewById(R.id.cart_badge);
+
+        itView .setText(sCount);
+        Toast.makeText(context, "Book added to list successfully", Toast.LENGTH_SHORT).show();
+        //args.putString("book",pos);
+
 
     }
+
     @Override
     public void onDestroy(){
             super.onDestroy();

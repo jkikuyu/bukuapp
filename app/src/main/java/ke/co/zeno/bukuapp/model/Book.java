@@ -1,25 +1,48 @@
 package ke.co.zeno.bukuapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  *  @author Jude Kikuyu
  *  date: 10/10/2017
+ *  ref:http://www.vogella.com/tutorials/AndroidParcelable/article.html
  */
 
-public class Book {
+public class Book implements Parcelable{
     private String title;
     private String description;
     private Integer edition;
-
-
     private Integer level;
     private Double price;
     private String image;
     private Integer drawable;
     private Integer subject;
-    public Book() {
+    public Book(){
+
+    }
+    public Book(Parcel in) {
+        this.title = in.readString();
+        this.description = in.readString();
+        this.edition = in.readInt();
+        this.level = in.readInt();
+        this.price = in.readDouble();
+        this.image = in.readString();
+        this.drawable =in.readInt();
+        this.subject = in.readInt();
 
 
     }
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
 
     public String getTitle() {
         return title;
@@ -88,4 +111,36 @@ public class Book {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeString(this.description);
+        dest.writeInt(this.edition);
+        dest.writeInt(this.level);
+        dest.writeDouble(this.price);
+        dest.writeString(this.image);
+        dest.writeInt(this.drawable);
+        dest.writeInt(this.subject);
+
+
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", edition=" + edition +
+                ", level=" + level +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                ", drawable=" + drawable +
+                ", subject=" + subject +
+                '}';
+    }
 }

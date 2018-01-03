@@ -21,7 +21,8 @@ import ke.co.zeno.bukuapp.R;
 import ke.co.zeno.bukuapp.model.Subject;
 
 /**
- * Created by nimda on 09/10/17.
+ * @author Jude Kikuyu
+ * date: 09/10/17.
  */
 
 public class SubjectHelperAdapter extends RecyclerView.Adapter<SubjectHelperAdapter.SubjectViewHolder> {

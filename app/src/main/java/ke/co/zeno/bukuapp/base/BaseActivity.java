@@ -76,7 +76,8 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
         getMenuInflater().inflate(R.menu.menu_main, menu);
         NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menuNav = mNavigationView.getMenu();
-        menuNav.findItem(R.id.nav_home).setIcon(
+
+           menuNav.findItem(R.id.nav_home).setIcon(
                 new IconDrawable(this, FontAwesomeIcons.fa_home)
                         .colorRes(R.color.ab_icon)
                         .actionBarSize());

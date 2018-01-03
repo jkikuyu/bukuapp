@@ -7,8 +7,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
-    <item android:id="@+id/navigate"
-        android:orderInCategory="200"
-        app:showAsAction="always"
-        android:title="@string/next" />
+
+    <item android:id="@+id/scart"
+          android:orderInCategory="300"
+          app:actionLayout="@layout/notification_count_badge_actionbar"
+          app:showAsAction="always"
+          android:title="@string/badge" />
 </menu>

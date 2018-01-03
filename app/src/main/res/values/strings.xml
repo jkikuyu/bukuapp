@@ -39,5 +39,10 @@
     <string name="book_title">Title</string>
     <string name="book_condition">Condition</string>
     <string name="owner_comment">Additional Comment</string>
+    <string name="book_desc">Book Description</string>
+    <string name="addToList">Add</string>
+    <string name="book_list">Books</string>
+    <string name="cart">cart</string>
+    <string name="badge">badge</string>
 
 </resources>

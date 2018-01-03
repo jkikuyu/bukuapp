@@ -16,6 +16,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Jude Kikuyu on 18/11/17.
+ * ref http://www.vogella.com/tutorials/AndroidCamera/article.html
+ * https://stackoverflow.com/questions/10913682/how-to-capture-and-save-an-image-using-custom-camera-in-android
  */
 
 public class PhotoHandler implements PictureCallback {
@@ -44,7 +46,7 @@ public class PhotoHandler implements PictureCallback {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmddhhmmss");
         String date = dateFormat.format(new Date());
-        String photoFile = "P   ``````````````````````````````````````````````````````````````````````````````  1   11111111111111111ic_" + date + ".jpg";
+        String photoFile = "Pic_" + date + ".jpg";
 
         String filename = pictureFileDir.getPath() + File.separator + photoFile;
         Toast.makeText(context, "filename path:" + filename,
